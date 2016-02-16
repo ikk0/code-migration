@@ -61,7 +61,11 @@ class NamingHelper
                 $this->logger->warn(sprintf('Class not found for alias "%s"', $m1ModuleAlias));
                 return null;
             }
-            $m1ClassSuffix = ucwords($m1ClassSuffix, '_');
+            if (strpos($m1ClassSuffix, '_') === false) {
+                $m1ClassSuffix = ucfirst($m1ClassSuffix);
+            } else {
+                $m1ClassSuffix = ucwords($m1ClassSuffix, '_');
+            }
             $result = $m1ClassPrefix . '_' . $m1ClassSuffix;
         }
         return $result;
